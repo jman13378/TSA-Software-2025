@@ -3,6 +3,7 @@ import Home from "../views/Home.vue";
 import chat from "../views/Chat.vue";
 import mf from "../views/mf.vue";
 import { CredentialManager, socket } from "../../globals";
+import ArchivePage from "../views/componenets/ArchivePage.vue"
 import Map from "../views/components/Map.vue";
 const router = createRouter({
   history: createWebHistory(),
@@ -18,9 +19,9 @@ const router = createRouter({
       component: chat,
     },
     {
-      path: "/mf",
-      name: "Mf",
-      component: mf,
+      path: "/archive",
+      name: "Archive",
+      component: ArchivePage,
     },
     {
       path: "/map",
