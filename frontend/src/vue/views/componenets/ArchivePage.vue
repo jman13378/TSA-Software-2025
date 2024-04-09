@@ -25,7 +25,6 @@
     } else {
       document.getElementById("spec-tab").classList.add("active");
     }
-    M.AutoInit();
 
     const list = document.getElementById("list");
     let username = "jman13378";
@@ -62,6 +61,8 @@
 </template>
 <script>
 import { socket } from "../../../globals.js";
+M.AutoInit();
+
 export default {
   name: "ArchivePage",
   props: {
