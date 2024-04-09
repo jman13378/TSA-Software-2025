@@ -2,7 +2,6 @@ let data = "./database/storage.db";
 import { User, Profile } from "../models/User";
 
 let db = require("better-sqlite3")(data);
-import password from "password-hash"
 function decodeBase64(data: string) {
   return Buffer.from(data, "base64").toString("ascii");
 }

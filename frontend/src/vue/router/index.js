@@ -27,7 +27,6 @@ const router = createRouter({
     {
       path: "/sessionid/:token",
       name: "Session Id",
-      component: mf,
       beforeEnter: (to, from, next) => {
         let token = to.params.token;
         if (token) {
