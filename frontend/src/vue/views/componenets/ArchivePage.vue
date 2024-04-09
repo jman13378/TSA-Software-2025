@@ -7,7 +7,31 @@
   <div id="tab-spec-tab" class="col s12"><iframe src="https://drive.google.com/file/d/150DbTO4RfntszO82PCvUNRw0b86IbQDl/preview" width="640" height="480" allow="autoplay"></iframe></div>
   <div id="tab-code-tab" class="col s12"><ul style="list-style: none" id="list"></ul></div>
   <div id="tab-other-tab" style="height: 91.4%" class="col s12"><iframe style="height: -webkit-fill-available; width: -webkit-fill-available" src="https://docs.google.com/document/d/e/2PACX-1vSduKht6VPleDFOaqnIAEmJAVTwPQveBs6hE4oV4TB3Rbulh-1QkEhV20pMNVmZAZUY6sq88NoGl8xg/pub?embedded=true"></iframe></div>
-  <script>
+
+</template>
+<script>
+import { socket } from "../../../globals.js";
+M.AutoInit();
+
+export default {
+  name: "ArchivePage",
+  props: {
+    project_name: String,
+  },
+  data() {
+    return {
+      project: {
+        name: this.project_name,
+        spec: [],
+        code: [],
+        other: [],
+      },
+    };
+  },
+  methods: {
+    fetchDirectory() {},
+  },
+  mounted() {
     let params = {};
     window.location.search
       .replace("?", "")
@@ -57,29 +81,8 @@
     }
 
     RefDirectory(params.dir || "");
-  </script>
-</template>
-<script>
-import { socket } from "../../../globals.js";
-M.AutoInit();
+    M.AutoInit();
 
-export default {
-  name: "ArchivePage",
-  props: {
-    project_name: String,
-  },
-  data() {
-    return {
-      project: {
-        name: this.project_name,
-        spec: [],
-        code: [],
-        other: [],
-      },
-    };
-  },
-  methods: {
-    fetchDirectory() {},
   },
   created() {
     socket.emit("archiveInfo", { project_name: this.project_name }, (response) => {
