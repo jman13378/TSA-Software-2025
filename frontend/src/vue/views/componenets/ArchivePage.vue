@@ -1,6 +1,6 @@
 <template>
   <ul id="tabs-swipe-demo" class="tabs">
-    <li class="tab col s3"><a id="spec-tab" href="#tab-spec-tab">Spec</a></li>
+    <li class="tab col s3"><a id="spec-tab" class="active" href="#tab-spec-tab">Spec</a></li>
     <li class="tab col s3"><a id="code-tab" href="#tab-code-tab">Code</a></li>
     <li class="tab col s3"><a id="other-tab" href="#tab-other-tab">Other</a></li>
   </ul>
