@@ -9,7 +9,7 @@ const router = createRouter({
     {
       path: "/chat",
       name: "Chat",
-      component: chat,
+      component: chat,  
     },
     {
       path: "/archive",

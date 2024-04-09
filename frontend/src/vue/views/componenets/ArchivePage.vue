@@ -82,9 +82,5 @@ export default {
   created() {
 
   },
-
-  components: {
-    Card,
-  },
 };
 </script>
