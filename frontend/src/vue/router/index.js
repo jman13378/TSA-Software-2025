@@ -2,7 +2,7 @@ import { createWebHistory, createRouter } from "vue-router";
 import Home from "../views/Home.vue";
 import chat from "../views/Chat.vue";
 import mf from "../views/mf.vue";
-import { CredentialManager,socket } from "../../globals";
+import { CredentialManager, socket } from "../../globals";
 import Map from "../views/components/Map.vue";
 const router = createRouter({
   history: createWebHistory(),
@@ -27,7 +27,13 @@ const router = createRouter({
       name: "Map",
       component: Map,
     },
-    {path:"/logout",name:"Logout",beforeEnter:(to,from,next)=>{window.location.href= `http://localhost/socket/logout/${socket.id}`}},
+    {
+      path: "/logout",
+      name: "Logout",
+      beforeEnter: (to, from, next) => {
+        socket.emit("logout");
+      },
+    },
     {
       path: "/sessionid/:token",
       name: "Session Id",
@@ -35,11 +41,9 @@ const router = createRouter({
       beforeEnter: (to, from, next) => {
         let token = to.params.token;
         if (token) {
-          let cred= atob(token).split(".");
+          let cred = atob(token).split(".");
 
-          CredentialManager.AddCheck(cred[0],cred[1],undefined, (res)=> {
-            
-          });
+          CredentialManager.AddCheck(cred[0], cred[1], undefined, (res) => {});
         }
         if (to.params.id === "123") {
           next();
