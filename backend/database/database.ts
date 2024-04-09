@@ -22,7 +22,14 @@ class Database {
     "email TEXT NOT NULL UNIQUE," + 
     "username TEXT NOT NULL UNIQUE," + 
     "password TEXT NOT NULL," + 
-    "profile TEXT NOT NULL);")
+    "profile BLOB NOT NULL);")
+
+    db.exec("CREATE TABLE IF NOT EXISTS projectArchive (" + 
+    "name TEXT NOT NULL UNIQUE," + 
+    "spec TEXT NOT NULL UNIQUE," + 
+    "members BLOB NOT NULL UNIQUE," + 
+    "code BLOB NOT NULL," + 
+    "other BLOB NOT NULL);")
   
   }
   checkUserPassword() {

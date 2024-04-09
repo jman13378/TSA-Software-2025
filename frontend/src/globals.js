@@ -5,7 +5,7 @@ export const CredentialManager = new Creds();
 var socketInstance = null;
 
 if (!socketInstance) {
-  socketInstance = io("http://localhost:80/");
+  socketInstance = io("https://localhost:80/");
 }
 
 export const socket = {

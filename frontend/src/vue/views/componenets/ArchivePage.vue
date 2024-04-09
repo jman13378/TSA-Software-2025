@@ -61,6 +61,7 @@
   </script>
 </template>
 <script>
+import { socket } from "../../../globals.js";
 export default {
   name: "ArchivePage",
   props: {
@@ -80,7 +81,9 @@ export default {
     fetchDirectory() {},
   },
   created() {
-
+    socket.emit("archiveInfo", { project_name: this.project_name }, (response) => {
+      response.spec;
+    });
   },
 };
 </script>
