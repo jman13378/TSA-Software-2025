@@ -54,7 +54,7 @@ export default {
     let username = "jman13378";
     let repo = "TSA-Software-2024";
     /// this has to only be done through the backend as having this in page is a security issue
-    let fgt = "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";
+    let fgt = "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";
     function RefDirectory(dir) {
       let xhr = new XMLHttpRequest();
       if (fgt) xhr.open("GET", `https://api.github.com/repos/${username}/${repo}/contents/${dir}`);
