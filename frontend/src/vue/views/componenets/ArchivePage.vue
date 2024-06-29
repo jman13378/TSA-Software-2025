@@ -51,10 +51,10 @@ export default {
     }
 
     const list = document.getElementById("list");
-    let username = "jman13378";
+    let username = "PBMHS-TSA";
     let repo = "TSA-Software-2024";
     /// this has to only be done through the backend as having this in page is a security issue
-    let fgt = "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";
+    let fgt = "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";
     function RefDirectory(dir) {
       let xhr = new XMLHttpRequest();
       if (fgt) xhr.open("GET", `https://api.github.com/repos/${username}/${repo}/contents/${dir}`);
