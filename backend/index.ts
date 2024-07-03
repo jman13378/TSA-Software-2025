@@ -18,7 +18,7 @@ for (let i = 0; i < allowedIps.length; i++) {
 }
 
 const corsOptions = {
-  origin: [ "localhost","chaptercore.pages.dev","chaptercore.org", "https://webpack-7xv.pages.dev", "http://192.168.56.1:8080", "http://localhost:8080/", "http://localhost:5173/", ...allowedIps],
+  origin: [ "localhost","chaptercore.pages.dev","chaptercore.org","https://app.chaptercore.org/", "https://webpack-7xv.pages.dev", "http://192.168.56.1:8080", "http://localhost:8080/", "http://localhost:5173/", ...allowedIps],
   credentials: true,
 };
 
