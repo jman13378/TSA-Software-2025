@@ -1,7 +1,7 @@
 import { createWebHistory, createRouter } from "vue-router";
 import chat from "../views/Chat.vue";
 import { CredentialManager, socket } from "../../globals";
-import ArchivePage from "../views/componenets/ArchivePage.vue"
+import ArchivePage from "../views/ArchivePage.vue"
 const router = createRouter({
   history: createWebHistory(),
   routes: [
@@ -9,37 +9,36 @@ const router = createRouter({
     {
       path: "/chat",
       name: "Chat",
-      component: chat,  
+      component: chat 
     },
     {
       path: "/archive",
       name: "Archive",
-      component: ArchivePage,
+      component: ArchivePage
     },
-
     {
       path: "/logout",
       name: "Logout",
-      beforeEnter: (to, from, next) => {
-        socket.emit("logout");
-      },
+      // beforeEnter: (to, from, next) => {
+      //   socket.emit("logout");
+      // },
     },
     {
       path: "/sessionid/:token",
       name: "Session Id",
-      beforeEnter: (to, from, next) => {
-        let token = to.params.token;
-        if (token) {
-          let cred = atob(token).split(".");
+      // beforeEnter: (to, from, next) => {
+      //   let token = to.params.token;
+      //   if (token) {
+      //     let cred = atob(token).split(".");
 
-          CredentialManager.AddCheck(cred[0], cred[1], undefined, (res) => {});
-        }
-        if (to.params.id === "123") {
-          next();
-        } else {
-          next({ name: "Home" });
-        }
-      },
+      //     CredentialManager.AddCheck(cred[0], cred[1], undefined, (res) => {});
+      //   }
+      //   if (to.params.id === "123") {
+      //     next();
+      //   } else {
+      //     next({ name: "Home" });
+      //   }
+      // },
     },
   ],
 });

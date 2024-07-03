@@ -6,16 +6,17 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "vite --build",
-    "dev": "vite dev"
+    "dev": "vite  dev "
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@paypal/paypal-js": "^8.1.0",
     "@vitejs/plugin-vue": "^5.0.3",
-
     "socket.io-client": "^4.7.5",
     "vite": "^5.0.12",
     "vue": "^3.4.21",
+    "vue-paypal-checkout": "^3.2.0",
     "vue-router": "^4.3.0"
   }
 }

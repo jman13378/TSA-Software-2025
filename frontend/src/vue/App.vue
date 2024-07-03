@@ -12,10 +12,12 @@
         </ul>
       </div>
     </nav>
+    <CheckOut></CheckOut>
     <router-view />
   </template>
   <script>
   import { socket, CredentialManager } from "../globals";
+import CheckOut from "./views/CheckOut.vue";
   
   export default {
     async mounted() {
@@ -28,6 +30,7 @@
     methods: {
       logout() {window.location.href= `http://localhost/socket/logout/${socket.id}`},
     },
+    components: {CheckOut}
   };
   </script>
   
