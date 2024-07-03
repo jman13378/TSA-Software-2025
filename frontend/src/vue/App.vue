@@ -12,7 +12,6 @@
         </ul>
       </div>
     </nav>
-    <CheckOut></CheckOut>
     <router-view />
   </template>
   <script>

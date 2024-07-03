@@ -18,7 +18,7 @@ for (let i = 0; i < allowedIps.length; i++) {
 }
 
 const corsOptions = {
-  origin: ["localhost:5173","chaptercore.pages.dev","chaptercore.org", "https://webpack-7xv.pages.dev", "http://192.168.56.1:8080", "http://localhost:8080/", "http://localhost:5173/", ...allowedIps],
+  origin: [ "localhost","chaptercore.pages.dev","chaptercore.org", "https://webpack-7xv.pages.dev", "http://192.168.56.1:8080", "http://localhost:8080/", "http://localhost:5173/", ...allowedIps],
   credentials: true,
 };
 
@@ -44,7 +44,7 @@ const server = https.createServer(credentials, app);
 
 const io = new Server(server);
 const socket = require('./socket')(io, db);
-
-server.listen(80, () => {
-  console.log('Server running on port 80');
+server.listen(3000, "0.0.0.0", () => {
+  console.log(server.address())
+  console.log('Server running on port 80' );
 });

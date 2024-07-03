@@ -2,7 +2,8 @@ import { Creds } from "./credentialManager";
 import { io } from "socket.io-client";
 export const CredentialManager = new Creds();
 
-var socketInstance = io("https://backend.chaptercore.org/");
+// var socketInstance = io("https://backend.chaptercore.org/");
+var socketInstance = io("https://localhost:3000/");
 
 
 export const socket = {

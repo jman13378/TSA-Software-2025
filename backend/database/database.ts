@@ -38,7 +38,10 @@ class Database {
     )
     db.exec("CREATE TABLE IF NOT EXISTS messages (" + 
       "MessageId NUMERIC NOT NULL UNIQUE," +
-      "location TEXT " +
+      "ChapterId NUMERIC NOT NULL," +
+      "UserId NUMERIC NOT NULL," +
+      "Message TEXT NOT NULL" +
+      ");"
     
     )
     /*db.exec("CREATE TABLE IF NOT EXISTS projectArchive (" + 
