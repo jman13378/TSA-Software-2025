@@ -11,14 +11,15 @@ export default {
     },
     methods: {
         sendMessage() {
-            socket.emit('message', this.message)
+            socket.join("lmao")
+
+            socket.emit('send message', this.message)
             this.message = ''
         }
     },
     mounted() {
-        socket.join("server")
-        socket.on('message', (data) => {
-            sendNotification(data)
+        socket.on('receive message', (data) => {
+            sendNotification("lmao loller",data.message)
         })
     }
 }

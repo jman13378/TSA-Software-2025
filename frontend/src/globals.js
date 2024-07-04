@@ -5,8 +5,8 @@ export const CredentialManager = new Creds();
 // var socketInstance = io("https://backend.chaptercore.org/");
 var socketInstance = io("https://localhost:3000/");
 
-
 export const socket = {
+  socket: socketInstance,
   on: socketInstance.on.bind(socketInstance),
   id: socketInstance.id,
   emit: (ev, body, callback) => {
@@ -20,12 +20,15 @@ export const socket = {
 
     socketInstance.emit(ev, JSON.stringify(payload), (response) => callback && callback(response));
   },
-  join: (serverid) => {
+  join: (roomId) => {
     socket.emit("join", {
-      Id: serverid,
+      Id: roomId,
     });
   },
 };
+socket.socket.onAny((event, ...args) => {
+  console.log(event, args);
+});
 /**
  * this will be for the desktop app once we start the mobile app it will be different
  */
@@ -43,8 +46,7 @@ export function sendNotification(title, body, icon = "../dist/img/logo.png", opt
     notification.onclick = function () {
       if (window["desktop"] == true) {
         window.open(`twetzel://`);
-      } else
-        window.open(``);
+      } else window.open(``);
     };
   }
 }

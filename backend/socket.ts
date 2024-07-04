@@ -4,9 +4,10 @@ module.exports = function (io: Server, db: Database) {
   io.on('connection', (socket) => {
     require('./socketroutes/template')(io, socket, db);
     require('./socketroutes/chat')(io, socket, db);
+    require('./socketroutes/join')(io, socket, db);
     console.log('a user connected');
     socket.on('disconnect', () => {
-      console.log('user disconnected');
+      console.log('user  disconnected');
     });
 
   });
