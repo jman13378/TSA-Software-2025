@@ -13,7 +13,7 @@ const privateKey = fs.readFileSync('./ssl/key.txt', 'utf8');
 const certificate = fs.readFileSync('./ssl/cert.txt', 'utf8');
 const credentials = { key: privateKey, cert: certificate };
 
-const allowedIps = ["192.168.56.1", "10.90.9.5", "10.90.32.36", "192.168.68.131"];
+const allowedIps = ["192.168.56.1", "10.90.9.5", "10.90.32.36", "192.168.68.131", "192.168.86.53"];
 for (let i = 0; i < allowedIps.length; i++) {
   allowedIps[i] = "http://" + allowedIps[i] + ":8080";
 }
