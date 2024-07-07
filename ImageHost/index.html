@@ -1,0 +1,192 @@
+<style>
+
+
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        line-height: 1.6;
+        background-color: #f4f4f4;
+        color: #333;
+    }
+    
+    header {
+        background: #333;
+        color: #fff;
+        padding: 1em 0;
+        text-align: center;
+    }
+    
+    header h1 {
+        margin: 0;
+        font-size: 2em;
+    }
+    
+    header h2 {
+        margin: 0.5em 0 0;
+        font-size: 1.2em;
+    }
+    
+    section {
+        padding: 2em;
+        max-width: 800px;
+        margin: 0 auto;
+        background: #fff;
+        margin-bottom: 1em;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    
+    section img {
+        width: 100%;
+        height: auto;
+        margin-top: 1em;
+    }
+    
+    ul {
+        list-style: none;
+        padding: 0;
+    }
+    
+    ul li {
+        background: #e4e4e4;
+        margin: 0.5em 0;
+        padding: 0.5em;
+        border-radius: 5px;
+    }
+    
+    h3, h4 {
+        color: #333;
+        font-family: Black Ops One;
+    }
+    
+    #faqs .faq {
+        margin-bottom: 1em;
+    }   
+    
+    #faqs .faq h4 {
+        margin: 0.5em 0;
+        color: #444;
+    }
+    
+    #faqs .faq p {
+        margin: 0;
+    }
+    @import url("https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap");
+</style>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChapterCore</title>
+</head>
+<body>
+    <header>
+        <h1>ChapterCore: TSA Chapter Chat/Archive</h1>
+        <h2>For the 2024-2025 TSA Software Development Project</h2>
+    </header>
+
+    <section id="features">
+        <h3>Welcome to ChapterCore!</h3>
+        <p>Your one-stop solution for managing TSA chapter communications and archives.</p>
+
+        <h3>Main Features:</h3>
+        <ul>
+            <li>Announcements: Receive announcements with push notifications, SMS, and email.</li>
+            <li>Event Rooms: Create separate rooms for each event, assignable manually or via CSV, and archived yearly.</li>
+            <li>Member Communication: Chat with other members within the app.</li>
+            <li>Archive: Store all code, designs, and portfolios securely.</li>
+            <li>API Access: Utilize our API in other applications with rate limiting by Cloudflare.</li>
+            <li>Gantt Charts & Audit Logs: Manage and track project progress with built-in Gantt charts and detailed audit logs.</li>
+        </ul>
+        <img src="./features.jpg" alt="ChapterCore Features">
+    </section>
+
+    <section id="additional-info">
+        <h3>Additional Information:</h3>
+        <h4>Join Policy:</h4>
+        <p>Members will need authentication managed by the president, vice president, sergeant-at-arms, and chapter advisor. All account information is secure and encrypted.</p>
+
+        <h4>Parental Usage:</h4>
+        <p>Parents can sign up for announcement notifications and create direct messages with any user but cannot access archives or chats except for announcements.</p>
+
+        <h4>Archive Policy:</h4>
+        <ul>
+            <li>Messages saved up to 5 years unless specified.</li>
+            <li>Event archives with specs, user guides, portfolios, and documentation are stored.</li>
+            <li>Events without a theme are hidden from users except those who worked on them.</li>
+        </ul>
+
+        <h4>Charts:</h4>
+        <ul>
+            <li>Gantt Charts: Auto-populated with user-specific colors and task statuses.</li>
+            <li>List Views: Task management with priority and due date columns.</li>
+            <li>Board Views: Visual task tracking with To-Do, In-Progress, and Done categories.</li>
+        </ul>
+        <img src="./chart.jpg" alt="ChapterCore Charts">
+
+        <h4>Roles:</h4>
+        <ul>
+            <li>Admins: Manage rooms, messages, and access tokens; control visibility of event archives.</li>
+            <li>Chapter Advisors: Add/remove rooms/events, manage admins, and have all admin capabilities.</li>
+            <li>Project Managers: View and manage all project-related content.</li>
+        </ul>
+    </section>
+
+    <section id="faqs">
+        <h3>Frequently Asked Questions (FAQs)</h3>
+
+        <div class="faq">
+            <h4>Q1: What is ChapterCore?</h4>
+            <p>A: ChapterCore is an app designed to replace traditional chapter communication tools with a comprehensive solution for managing announcements, chats, and archives.</p>
+        </div>
+
+        <div class="faq">
+            <h4>Q2: How can I join ChapterCore?</h4>
+            <p>A: Members need to authenticate through a process managed by the chapter’s leadership. Once authenticated, you can access all relevant features.</p>
+        </div>
+
+        <div class="faq">
+            <h4>Q3: Can parents access the app?</h4>
+            <p>A: Parents can receive announcements and create direct messages but cannot access event archives or chats except for announcements.</p>
+        </div>
+
+        <div class="faq">
+            <h4>Q4: How secure is my information on ChapterCore?</h4>
+            <p>A: All sensitive information, including passwords, is encrypted using advanced security measures to ensure data protection.</p>
+        </div>
+
+        <div class="faq">
+            <h4>Q5: What happens to old event data?</h4>
+            <p>A: Event data is archived and stored for up to 5 years, with detailed documentation and specifications attached.</p>
+        </div>
+
+        <div class="faq">
+            <h4>Q6: What types of charts does ChapterCore offer?</h4>
+            <p>A: ChapterCore offers Gantt charts, list views, and board views for efficient task and project management.</p>
+        </div>
+
+        <img src="./security.jpg" alt="ChapterCore Security">
+
+        <div class="faq">
+            <h4>Q7: How can I manage my tasks?</h4>
+            <p>A: Use the Gantt charts, list views, and board views to track and manage your tasks with ease.</p>
+        </div>
+
+        <div class="faq">
+            <h4>Q8: Can I access ChapterCore on mobile?</h4>
+            <p>A: Yes, ChapterCore is designed to be mobile-friendly, ensuring you can stay connected and manage tasks on the go.</p>
+        </div>
+    </section>
+
+    <section id="get-started">
+        <h3>Get Started with ChapterCore Today!</h3>
+        <p>Join our community and take your TSA chapter communications and project management to the next level.</p>
+        <img src="./started.png" alt="Get Started with ChapterCore">
+    </section>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
