@@ -1,0 +1,54 @@
+{
+    "name": "My Example Source",
+    "subtitle": "All my apps in one place.",
+    "description": "Welcome to my source! Here you'll find all of my apps.",
+    "iconURL": "https://f000.backblazeb2.com/file/rileytestut/ExampleSource/OctoSource.png",
+    "headerURL": "https://f000.backblazeb2.com/file/rileytestut/ExampleSource/OceanHeader.png",
+    "website": "https://example.com",
+    "tintColor": "#4185A9",
+    "featuredApps": [
+      "org.chaptercore.app"
+
+    ],
+    "apps": [
+      {
+        "name": "ChapterCore",
+        "bundleIdentifier": "org.chaptercore.app",
+        "developerName": "Jonathan",
+        "subtitle": "An awesome app.",
+        "localizedDescription": "This is an awesome app only available on AltStore and Google Play.",
+        "iconURL": "https://chaptercore.org/icon.png",
+        "tintColor": "#5CA399",
+        "screenshots": [
+          "https://chaptercore.org/icon.png",
+          "https://chaptercore.org/featureimage(1).png"
+        ],
+        "versions": [
+          {
+            "version": "1.1",
+            "date": "2022-05-01T09:00:00-08:00",
+            "size": 20000000,
+            "downloadURL": "https://example.com/myapp_v1.1.ipa",
+            "localizedDescription": "New features and bug fixes.",
+            "minOSVersion": "12.0"
+          }
+          
+        ],
+        "appPermissions": {
+          "entitlements": [
+            "com.apple.security.application-groups",
+            "com.apple.developer.siri"
+          ],
+          "privacy": {
+            "NSPhotoLibraryUsageDescription": "App saves photos to your Photo Library.",
+            "NSCameraUsageDescription": "App uses camera to take photos.",
+            "NSMicrophoneUsageDescription": "App uses microphone to record video."
+          }
+        }
+      }
+      
+    ],
+    "news": [
+      
+    ]
+  }

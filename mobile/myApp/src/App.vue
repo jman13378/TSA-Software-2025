@@ -5,10 +5,11 @@
         <ion-content>
           <ion-list id="inbox-list">
             <ion-list-header>Welcome Back!</ion-list-header>
-            <ion-note>{{ Username }}</ion-note>
+            <ion-note>Username </ion-note>
 
-            <ion-menu-toggle :auto-hide="false" v-for="(p, i) in appPages" :key="i">
-              <ion-item @click="selectedIndex = i" router-direction="root" :router-link="p.url" lines="none" :detail="false" class="hydrated" :class="{ selected: selectedIndex === i }">
+            <ion-menu-toggle :auto-hide="false" v-for="(p, i) in appPages" :v-if="p.showIf" :key="i">
+              <ion-item @click="selectedIndex = i" router-direction="root" :router-link="p.url" lines="none"
+                :detail="false" class="hydrated" :class="{ selected: selectedIndex === i }">
                 <ion-icon aria-hidden="true" slot="start" :ios="p.iosIcon" :md="p.mdIcon"></ion-icon>
                 <ion-label>{{ p.title }}</ion-label>
               </ion-item>
@@ -73,11 +74,13 @@ const appPages = [
     url: '/login',
     iosIcon: logInOutline,
     mdIcon: logInOutline,
-  },  {
+    showIf: true
+  }, {
     title: 'Signup',
     url: '/signup',
     iosIcon: createOutline,
     mdIcon: createOutline,
+    showIf: false
   },
 ];
 const labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];

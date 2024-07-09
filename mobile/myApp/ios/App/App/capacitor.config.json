@@ -1,6 +1,6 @@
 {
-	"appId": "io.ionic.starter",
-	"appName": "myApp",
+	"appId": "org.chaptercore.app",
+	"appName": "ChapterCore",
 	"webDir": "dist",
 	"packageClassList": [
 		"AppPlugin",
