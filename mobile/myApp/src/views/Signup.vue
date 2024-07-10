@@ -176,9 +176,7 @@ const toastMessage = ref("");
 const canSubmit = computed(
     () => name.value.trim() !== "" && password.value.trim() !== ""
 );
-const info = await Device.getId();
 
-console.log(info);
 
 const onSignup = () => {
 
