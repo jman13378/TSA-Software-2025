@@ -82,9 +82,9 @@
                             </ion-radio-group>
                             <ion-input labelPlacement="stacked" label="Chapter Id" v-model="chapterId" name="chapterId"
                                 type="text" required></ion-input>
-                            <ion-input labelPlacement="stacked" label="Organization Name" v-model="orgName"
+                            <ion-input labelPlacement="stacked" v-if="chapterOption=='create'" label="Organization Name" v-model="orgName"
                                 name="orgName" type="text" required></ion-input>
-                            <ion-input labelPlacement="stacked" label="Pin" v-model="pin"
+                            <ion-input labelPlacement="stacked" v-if="chapterOption=='create'" label="Pin" v-model="pin"
                                 name="pin" type="number" required></ion-input>
                         </ion-label>
                     </ion-item>
@@ -104,7 +104,7 @@
 
                 <ion-row responsive-sm class="ion-padding">
                     <ion-col>
-                        <ion-button :disabled="!canSubmit"  type="submit" expand="block">Login</ion-button>
+                        <ion-button  type="submit" expand="block">Login</ion-button>
                     </ion-col>
 
                 </ion-row>
@@ -173,14 +173,12 @@ const submitted = ref(false);
 const showToast = ref(false);
 const toastMessage = ref("");
 
-const canSubmit = computed(
-    () => name.value.trim() !== "" && password.value.trim() !== ""
-);
+
 
 
 const onSignup = () => {
 
-   // this.$router.push("/announcements")
+   //this.$router.push("/announcements")
 };
 
 </script>
