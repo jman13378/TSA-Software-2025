@@ -1,6 +1,7 @@
 const simpleGit = require('simple-git');
 const cron = require('node-cron');
 const { exec } = require('child_process');
+const os = require('os');
 
 const repoPath = './../../repotesting/TSA-Software-2025'; // Replace with the path to your repo
 const git = simpleGit(repoPath);
@@ -25,8 +26,18 @@ async function checkForUpdates() {
       await git.pull(`https://${GIT_USERNAME}:${GIT_PASSWORD}@${REPO_URL}`);
       console.log('Changes pulled. Restarting the application...');
 
+      // Check the operating system
+      const platform = os.platform();
+      let command = '';
+
+      if (platform === 'win32') {
+        command = 'nodemon app.js'; // Windows doesn't need 'sudo'
+      } else {
+        command = 'sudo nodemon app.js'; // Linux or macOS
+      }
+
       // Restart the application using nodemon
-      exec('sudo nodemon app.js', { cwd: repoPath }, (err, stdout, stderr) => {
+      exec(command, { cwd: repoPath }, (err, stdout, stderr) => {
         if (err) {
           console.error(`Error restarting application: ${err}`);
           return;
