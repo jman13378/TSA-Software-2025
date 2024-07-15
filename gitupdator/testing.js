@@ -1,6 +1,6 @@
 const simpleGit = require('simple-git');
 const cron = require('node-cron');
-const { exec,spawn } = require('child_process');
+const { exec } = require('child_process');
 const os = require('os');
 
 const repoPath = './../../repotesting/TSA-Software-2025'; // Replace with the path to your repo
@@ -38,24 +38,24 @@ async function checkForUpdates() {
       let command = '';
 
       if (platform === 'win32') {
-        command = 'nodemon app.js'; // Windows doesn't need 'sudo'
+        // Windows: Open a new Command Prompt and run nodemon
+        command = `start cmd.exe /k "nodemon app.js"`;
+      } else if (platform === 'darwin') {
+        // macOS: Open a new Terminal and run nodemon
+        command = `osascript -e 'tell application "Terminal" to do script "cd ${repoPath} && sudo nodemon app.js"'`;
       } else {
-        command = 'sudo nodemon app.js'; // Linux or macOS
+        // Linux: Open a new terminal (e.g., GNOME Terminal) and run nodemon
+        command = `gnome-terminal -- bash -c "cd ${repoPath} && sudo nodemon app.js; exec bash"`;
       }
 
-      // Restart the application using nodemon
-      nodemonProcess = spawn(command, { cwd: repoPath, shell: true });
-
-      nodemonProcess.stdout.on('data', (data) => {
-        console.log(`stdout: ${data}`);
-      });
-
-      nodemonProcess.stderr.on('data', (data) => {
-        console.error(`stderr: ${data}`);
-      });
-
-      nodemonProcess.on('close', (code) => {
-        console.log(`nodemon process exited with code ${code}`);
+      // Restart the application using nodemon in a new terminal
+      nodemonProcess = exec(command, (err, stdout, stderr) => {
+        if (err) {
+          console.error(`Error restarting application: ${err}`);
+          return;
+        }
+        console.log(stdout);
+        console.error(stderr);
       });
 
     } else {
