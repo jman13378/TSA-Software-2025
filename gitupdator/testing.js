@@ -31,7 +31,7 @@ async function checkForUpdates() {
       let command = '';
 
       if (platform === 'win32') {
-        command = 'nodemon app.js'; // Windows doesn't need 'sudo'
+        command = 'cd ./backend/ | nodemon index.ts'; // Windows doesn't need 'sudo'
       } else {
         command = 'sudo nodemon app.js'; // Linux or macOS
       }
