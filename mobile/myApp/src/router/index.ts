@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from '@ionic/vue-router';
 import { RouteRecordRaw } from 'vue-router';
-
+import {socket,credentialManager} from "./../globals.js"
 const routes: Array<RouteRecordRaw> = [
   {
     path: '',
@@ -17,6 +17,14 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/signup',
     component: () => import ('../views/Signup.vue')
+  },
+  {
+    path: '/logout',
+    beforeEnter: (to, from, next) => {
+      // Clear the token and user data
+      
+      next('/login');
+    }
   },
 ]
 

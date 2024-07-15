@@ -9,7 +9,7 @@ const socket = {
   socket: socketInstance,
   on: socketInstance.on.bind(socketInstance),
   id: socketInstance.id,
-  emit: (ev, body, callback) => {
+  emit: (ev:any=null, body:Object, callback:Function) => {
     let data = CredentialManager.getData();
 
     const payload = {
@@ -18,10 +18,10 @@ const socket = {
       userData: data == undefined ? {} : data,
     };
 
-    socketInstance.emit(ev, JSON.stringify(payload), (response) => callback && callback(response));
+    socketInstance.emit(ev, JSON.stringify(payload), (response:any) => callback && callback(response));
   },
-  join: (roomId) => {
-    socket.emit("join", {
+  join: (roomId:string) => {
+    socket.emit("join room", {
       Id: roomId,
     });
   },
@@ -50,4 +50,4 @@ socket.socket.onAny((event, ...args) => {
     };
   }
 }
-export {CredentialManager,playSound,CredentialManager,sendNotification,socket}
+export default {CredentialManager,playSound,CredentialManager,sendNotification,socket}

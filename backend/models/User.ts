@@ -1,4 +1,6 @@
 import {Database} from "../database/database"
+
+let {ResultSet}  = require("better-sqlite3").Database;
 class User {
     private id: number;
     private username: string;
