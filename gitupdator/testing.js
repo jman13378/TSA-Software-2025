@@ -40,7 +40,9 @@ function restartProcess() {
 
   // Restart the application using nodemon in a new terminal
   nodemonProcess = spawn(command, { shell: true });
-
+  nodemonProcess.stdout.on('data', (data) => {
+    console.log(`Received chunk ${data}`);
+  });
   nodemonProcess.on("error", (err) => {
     console.error(`Failed to start process: ${err}`);
   });
@@ -67,6 +69,10 @@ async function checkForUpdates() {
       console.log("Changes pulled.");
       restartProcess();
     } else {
+      if (nodemonProcess==null) {
+        console.log("Starting process...");
+        restartProcess();
+      }else 
       console.log("No new commits.");
     }
   } catch (err) {
