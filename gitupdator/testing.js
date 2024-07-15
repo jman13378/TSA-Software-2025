@@ -1,6 +1,6 @@
 const simpleGit = require('simple-git');
 const cron = require('node-cron');
-const { exec } = require('child_process');
+const { exec,spawn } = require('child_process');
 const os = require('os');
 
 const repoPath = './../../repotesting/TSA-Software-2025'; // Replace with the path to your repo
