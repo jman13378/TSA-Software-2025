@@ -1,11 +1,11 @@
 import { socket } from "./globals";
-
+import { Device } from "@capacitor/device";
 export class Creds {
-  constructor() {}
-  encodeBase64(data) {
+  constructor() { }
+  encodeBase64(data: string) {
     return btoa(data);
   }
-  decodeBase64(data) {
+  decodeBase64(data: string) {
     return atob(data);
   }
   getStorage() {
@@ -15,20 +15,21 @@ export class Creds {
    * saves the users data in storage
    * @param {JSON} userData
    */
-  saveData(userData) {
+  async saveData(userData: { SessionToken: string }) {
+    await Device.getId();
     this.getStorage().setItem("SessionToken", userData.SessionToken);
-    
+
   }
   /**
    * saves the data to storage
    * @param {string} SessionToken
    */
-  SaveData(SessionToken) {}
+  SaveData(SessionToken: string) { this.saveData({ SessionToken }); }
   /**
    *
    * @returns checks if any data is saved in storage
    */
-  hasData() {return (this.getStorage().getItem("SessionToken")!=null)}
+  hasData() { return (this.getStorage().getItem("SessionToken") != null) }
   /** gets the users saved data */
   getData() {
     return {
@@ -48,21 +49,22 @@ export class Creds {
    * @param {function} callback
    * @returns {boolean} if the user is valid
    */
-  Validate(callback) {socket.emit("validate user", this.getData(), callback);}
+  Validate(callback: Function) { socket.emit("validate user", this.getData(), callback); }
   /**
    * saves the user data in storage if the credentials are valid
-   * @param {String} username
-   * @param {String} password
-   * @param {String} email
    * @param {function} callback(boolean)
    */
-  AddCheck(username, password, email, callback) {}
+  AddCheck(username: string, password: string, email: string, callback: Function) { }
   /**
    * creates the users account in the database if all options are filled
-   * @param {String} username
-   * @param {String} password
-   * @param {String} email
    * @param {function} callback(response)
    */
-  CreateAccount(username, password, email, callback) {}
+  CreateAccount(options: Object, callback: Function) {
+    socket.emit("create account", options, (response:Object) => {
+      //console.log(response);
+
+      if (callback) callback(response);
+      else return response;
+    });
+  }
 }
