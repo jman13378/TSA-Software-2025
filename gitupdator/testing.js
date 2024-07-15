@@ -1,6 +1,6 @@
 const simpleGit = require('simple-git');
 const cron = require('node-cron');
-const { exec } = require('child_process');
+const { exec, spawn } = require('child_process');
 const os = require('os');
 
 const repoPath = './../../repotesting/TSA-Software-2025'; // Replace with the path to your repo
@@ -45,18 +45,22 @@ async function checkForUpdates() {
         command = `osascript -e 'tell application "Terminal" to do script "cd ${repoPath + "/backend"} && sudo nodemon index.ts"'`;
       } else {
         // Linux: Open a new terminal (e.g., GNOME Terminal) and run nodemon
-        command = `gnome-terminal -- bash -c "cd ${repoPath+ "/backend"} && sudo nodemon index.ts; exec bash"`;
+        command = `gnome-terminal -- bash -c "cd ${repoPath + "/backend"} && sudo nodemon index.ts; exec bash"`;
       }
 
-
       // Restart the application using nodemon in a new terminal
-      nodemonProcess = exec(command, (err, stdout, stderr) => {
-        if (err) {
-          console.error(`Error restarting application: ${err}`);
-          return;
+      nodemonProcess = spawn(command, { shell: true });
+
+      nodemonProcess.on('error', (err) => {
+        console.error(`Failed to start process: ${err}`);
+      });
+
+      nodemonProcess.on('close', (code) => {
+        if (code !== null) {
+          console.log(`nodemon process exited with code ${code}`);
+          // Restart the process if it was closed
+          checkForUpdates();
         }
-        console.log(stdout);
-        console.error(stderr);
       });
 
     } else {
