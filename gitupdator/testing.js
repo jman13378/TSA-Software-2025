@@ -14,6 +14,8 @@ const REPO_URL = 'https://github.com/PBMHS-TSA/TSA-Software-2025.git'; // Replac
 git.addConfig('user.name', GIT_USERNAME);
 git.addConfig('user.password', GIT_PASSWORD);
 
+let nodemonProcess = null;
+
 // Function to check for new commits and pull the latest changes
 async function checkForUpdates() {
   try {
@@ -26,25 +28,36 @@ async function checkForUpdates() {
       await git.pull(`https://${GIT_USERNAME}:${GIT_PASSWORD}@${REPO_URL}`);
       console.log('Changes pulled. Restarting the application...');
 
+      // Kill the existing nodemon process if it's running
+      if (nodemonProcess) {
+        nodemonProcess.kill();
+      }
+
       // Check the operating system
       const platform = os.platform();
       let command = '';
 
       if (platform === 'win32') {
-        command = 'cd ./backend/ | nodemon index.ts'; // Windows doesn't need 'sudo'
+        command = 'nodemon app.js'; // Windows doesn't need 'sudo'
       } else {
-        command = 'sudo nodemon index.ts'; // Linux or macOS
+        command = 'sudo nodemon app.js'; // Linux or macOS
       }
 
       // Restart the application using nodemon
-      exec(command, { cwd: repoPath+"/backend" }, (err, stdout, stderr) => {
-        if (err) {
-          console.error(`Error restarting application: ${err}`);
-          return;
-        }
-        console.log(stdout);
-        console.error(stderr);
+      nodemonProcess = spawn(command, { cwd: repoPath, shell: true });
+
+      nodemonProcess.stdout.on('data', (data) => {
+        console.log(`stdout: ${data}`);
       });
+
+      nodemonProcess.stderr.on('data', (data) => {
+        console.error(`stderr: ${data}`);
+      });
+
+      nodemonProcess.on('close', (code) => {
+        console.log(`nodemon process exited with code ${code}`);
+      });
+
     } else {
       console.log('No new commits.');
     }
