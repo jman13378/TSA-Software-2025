@@ -39,7 +39,7 @@ async function checkForUpdates() {
 
       if (platform === 'win32') {
         // Windows: Open a new Command Prompt and run nodemon
-        command = `start cmd.exe /k "cd ${repoPath + "/backend"} && nodemon index.ts"`;
+        command = `start cmd.exe /k "cd ${repoPath + "/backend"} && npm i && nodemon index.ts"`;
       } else if (platform === 'darwin') {
         // macOS: Open a new Terminal and run nodemon
         command = `osascript -e 'tell application "Terminal" to do script "cd ${repoPath + "/backend"} && sudo nodemon index.ts"'`;
