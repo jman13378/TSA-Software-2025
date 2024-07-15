@@ -47,6 +47,7 @@ async function checkForUpdates() {
         // Linux: Open a new terminal (e.g., GNOME Terminal) and run nodemon
         command = `gnome-terminal -- bash -c "cd ${repoPath+ "/backend"} && sudo nodemon index.ts; exec bash"`;
       }
+      
 
       // Restart the application using nodemon in a new terminal
       nodemonProcess = exec(command, (err, stdout, stderr) => {
