@@ -33,11 +33,11 @@ async function checkForUpdates() {
       if (platform === 'win32') {
         command = 'cd ./backend/ | nodemon index.ts'; // Windows doesn't need 'sudo'
       } else {
-        command = 'sudo nodemon app.js'; // Linux or macOS
+        command = 'sudo nodemon index.ts'; // Linux or macOS
       }
 
       // Restart the application using nodemon
-      exec(command, { cwd: repoPath }, (err, stdout, stderr) => {
+      exec(command, { cwd: repoPath+"/backend" }, (err, stdout, stderr) => {
         if (err) {
           console.error(`Error restarting application: ${err}`);
           return;
