@@ -3,7 +3,7 @@ const cron = require("node-cron");
 const { exec, spawn } = require("child_process");
 const os = require("os");
 
-const repoPath = "./../../repotesting/TSA-Software-2025"; // Replace with the path to your repo
+const repoPath = "./"; // Replace with the path to your repo
 const git = simpleGit(repoPath);
 
 const GIT_USERNAME = "jman13378"; // Replace with your Git username
@@ -40,9 +40,7 @@ function restartProcess() {
 
   // Restart the application using nodemon in a new terminal
   nodemonProcess = spawn(command, { shell: true });
-  nodemonProcess.stdout.on('data', (data) => {
-    console.log(`Received chunk ${data}`);
-  });
+ 
   nodemonProcess.on("error", (err) => {
     console.error(`Failed to start process: ${err}`);
   });
