@@ -7,7 +7,7 @@ const repoPath = "./"; // Replace with the path to your repo
 const git = simpleGit(repoPath);
 
 const GIT_USERNAME = "jman13378"; // Replace with your Git username
-const GIT_PASSWORD = "garconiamail1"; // Replace with your Git password or PAT
+const GIT_PASSWORD = "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"; // Replace with your Git password or PAT
 const REPO_URL = "https://github.com/PBMHS-TSA/TSA-Software-2025.git"; // Replace with your repository URL
 
 // Configure Git credentials
