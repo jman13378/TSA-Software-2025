@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from '@ionic/vue-router';
 import { RouteRecordRaw } from 'vue-router';
-import {socket,credentialManager} from "./../globals.js"
+import { socket, CredentialManager } from "./../globals.js"
 const routes: Array<RouteRecordRaw> = [
   {
     path: '',
@@ -8,22 +8,26 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: '/folder/:id',
-    component: () => import ('../views/FolderPage.vue')
+    component: () => import('../views/FolderPage.vue')
   },
   {
     path: '/login',
-    component: () => import ('../views/Login.vue')
+    component: () => import('../views/Login.vue')
   },
   {
     path: '/signup',
-    component: () => import ('../views/Signup.vue')
+    component: () => import('../views/Signup.vue')
+  }, {
+    path: '/chat',
+    component: () => import('../views/Chat.vue')
   },
   {
     path: '/logout',
+    redirect: '/login',
     beforeEnter: (to, from, next) => {
       // Clear the token and user data
+
       
-      next('/login');
     }
   },
 ]

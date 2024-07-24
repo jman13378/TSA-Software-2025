@@ -1,26 +1,25 @@
 <template>
   <ion-app>
-    <ion-split-pane content-id="main-content">
-      <ion-menu content-id="main-content" type="push">
-        <ion-content>
-          <ion-list id="inbox-list">
-            <ion-list-header>Welcome Back!</ion-list-header>
-            <ion-note>Username </ion-note>
+    <ion-menu content-id="main-content" :type="type">
 
-            <ion-menu-toggle :auto-hide="false" v-for="(p, i) in appPages" :v-if="p.showIf" :key="i">
-              <ion-item @click="selectedIndex = i" router-direction="root" :router-link="p.url" lines="none"
-                :detail="false" class="hydrated" :class="{ selected: selectedIndex === i }">
-                <ion-icon aria-hidden="true" slot="start" :ios="p.iosIcon" :md="p.mdIcon"></ion-icon>
-                <ion-label>{{ p.title }}</ion-label>
-              </ion-item>
-            </ion-menu-toggle>
-          </ion-list>
+      <ion-content>
+        <ion-list id="inbox-list">
+          <ion-list-header>Welcome Back!</ion-list-header>
+          <ion-note>Username </ion-note>
+
+          <ion-menu-toggle :auto-hide="false" v-for="(p, i) in appPages" :v-if="p.showIf" :key="i">
+            <ion-item @click="selectedIndex = i" router-direction="root" :router-link="p.url" lines="none"
+              :detail="false" class="hydrated" :class="{ selected: selectedIndex === i }">
+              <ion-icon aria-hidden="true" slot="start" :ios="p.iosIcon" :md="p.mdIcon"></ion-icon>
+              <ion-label>{{ p.title }}</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+        </ion-list>
 
 
-        </ion-content>
-      </ion-menu>
-      <ion-router-outlet id="main-content"></ion-router-outlet>
-    </ion-split-pane>
+      </ion-content>
+    </ion-menu>
+    <ion-router-outlet id="main-content"></ion-router-outlet>
   </ion-app>
 </template>
 
@@ -38,6 +37,7 @@ import {
   IonNote,
   IonRouterOutlet,
   IonSplitPane,
+  
 } from '@ionic/vue';
 import { ref } from 'vue';
 import {
@@ -57,9 +57,9 @@ import {
   warningSharp,
   logInOutline,
   logOutOutline,
-  createOutline
+  createOutline,
+  sendOutline
 } from 'ionicons/icons';
-
 const selectedIndex = ref(0);
 const appPages = [
   {
@@ -76,6 +76,12 @@ const appPages = [
     showIf: false
   },
   {
+    title: 'Chat',
+    url: '/chat',
+    iosIcon: sendOutline,
+    mdIcon: sendOutline,
+    showIf: false
+  }, {
     title: 'Logout',
     url: '/logout',
     iosIcon: logOutOutline,
@@ -88,8 +94,28 @@ const path = window.location.pathname.split('folder/')[1];
 if (path !== undefined) {
   selectedIndex.value = appPages.findIndex((page) => page.title.toLowerCase() === path.toLowerCase());
 }
-</script>
 
+</script>
+<script lang="ts">
+import { Device, DeviceInfo } from "@capacitor/device"
+declare global {
+  interface Window { device: DeviceInfo; }
+}
+export default {
+  data(_) {
+    return {
+      type="push"
+    }
+  },
+  beforeMount() {
+    Device.getInfo().then((info) => {
+      window.device = info
+    });
+    if (['Win32', 'Win64', 'Windows', 'WinCE'].includes(window.device.operatingSystem)) this.type = "overlay"
+    else this.type = "push",
+  }
+}
+</script>
 <style scoped>
 ion-menu ion-content {
   --background: var(--ion-item-background, var(--ion-background-color, #fff));
