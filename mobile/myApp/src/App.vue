@@ -1,5 +1,6 @@
 <template>
   <ion-app>
+    
     <ion-menu content-id="main-content" :type="type">
 
       <ion-content>
@@ -60,6 +61,7 @@ import {
   createOutline,
   sendOutline
 } from 'ionicons/icons';
+  
 const selectedIndex = ref(0);
 const appPages = [
   {
