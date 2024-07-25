@@ -3,7 +3,7 @@ const cron = require("node-cron");
 const { exec } = require("child_process");
 const os = require("os");
 
-const repoPath = "./"; // Replace with the path to your repo
+const repoPath = "~/TSA-Software-2025"; // Replace with the path to your repo
 const git = simpleGit(repoPath);
 
 const GIT_USERNAME = "jman13378"; // Replace with your Git username
