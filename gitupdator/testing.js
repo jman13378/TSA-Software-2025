@@ -55,10 +55,13 @@ function restartProcess() {
 }
 // Function to check for new commits and pull the latest changes
 async function checkForUpdates() {
+  console.log("Checking for updates...");
   try {
     await git.fetch(`https://${GIT_USERNAME}:${GIT_PASSWORD}@${REPO_URL}`);
 
     const status = await git.status();
+    console.log("Fetch Successful!");
+
     if (status.behind > 0) {
       console.log(`There are ${status.behind} new commits. Pulling changes...`);
 
@@ -80,6 +83,5 @@ async function checkForUpdates() {
 
 // Schedule the check to run every minute
 cron.schedule("* * * * *", () => {
-  console.log("Checking for updates...");
   checkForUpdates();
 });
