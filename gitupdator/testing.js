@@ -17,6 +17,7 @@ async function setRemoteUrl() {
   }
 }
 
+
 // Function to pull from Git and run commands
 async function updateRepo() {
   try {
