@@ -39,7 +39,7 @@ async function updateRepo() {
     console.log("Pulled the latest changes.");
 
     // Change directory and run npm install
-    exec(`npm i`, { cwd: repoPath }, (err, stdout, stderr) => {
+    exec(`npm i`, { cwd: backendPath }, (err, stdout, stderr) => {
       if (err) {
         console.error(`Error running npm install: ${stderr}`);
         return;
@@ -54,9 +54,9 @@ async function updateRepo() {
       }
 
       console.log("Starting nodemon with the latest changes...");
-      nodemonProcess = spawn('nodemon', ['index.ts'], { cwd: repoPath, stdio: 'inherit' });
+      nodemonProcess = spawn('nodemon', ['index.ts'], { cwd: backendPath, stdio: 'pipe' });
 
-      
+
       nodemonProcess.on('close', (code) => {
         console.log(`Nodemon process exited with code ${code}`);
         nodemonProcess = null; // Reset the process reference
