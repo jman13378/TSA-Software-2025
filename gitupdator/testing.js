@@ -56,6 +56,7 @@ async function updateRepo() {
       console.log("Starting nodemon with the latest changes...");
       nodemonProcess = spawn('nodemon', ['index.ts'], { cwd: repoPath, stdio: 'inherit' });
 
+      
       nodemonProcess.on('close', (code) => {
         console.log(`Nodemon process exited with code ${code}`);
         nodemonProcess = null; // Reset the process reference
