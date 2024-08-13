@@ -1,11 +1,14 @@
 const simpleGit = require("simple-git");
-const { exec } = require("child_process");
+const { exec, spawn } = require("child_process");
 const path = require("path");
 
 // Define the repository details
 const repoURL = "https://jman13378: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@github.com/PBMHS-TSA/TSA-Software-2025.git";
-const repoPath = path.join(__dirname, "..");
+const repoPath = path.join(__dirname, "TSA-Software-2025");
+const backendPath = path.join(repoPath, "backend");
 const git = simpleGit(repoPath);
+
+let nodemonProcess = null;
 
 // Function to set the remote URL with credentials
 async function setRemoteUrl() {
@@ -16,7 +19,6 @@ async function setRemoteUrl() {
     console.error(`Error setting remote URL: ${err.message}`);
   }
 }
-
 
 // Function to pull from Git and run commands
 async function updateRepo() {
@@ -45,14 +47,18 @@ async function updateRepo() {
 
       console.log(stdout);
 
-      // Run nodemon
-      exec(`nodemon index.ts`, { cwd: repoPath }, (err, stdout, stderr) => {
-        if (err) {
-          console.error(`Error running nodemon: ${stderr}`);
-          return;
-        }
+      // Restart nodemon process
+      if (nodemonProcess) {
+        console.log("Stopping existing nodemon process...");
+        nodemonProcess.kill(); // Kill the existing nodemon process
+      }
 
-        console.log(stdout);
+      console.log("Starting nodemon with the latest changes...");
+      nodemonProcess = spawn('nodemon', ['index.ts'], { cwd: repoPath, stdio: 'inherit' });
+
+      nodemonProcess.on('close', (code) => {
+        console.log(`Nodemon process exited with code ${code}`);
+        nodemonProcess = null; // Reset the process reference
       });
     });
   } catch (err) {
