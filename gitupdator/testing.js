@@ -26,7 +26,12 @@ async function updateRepo() {
     await setRemoteUrl();
 
     // Pull the latest changes from the Git repository
-    await git.pull("origin", "main");
+    const pullResult = await git.pull("origin", "main");
+
+    if (pullResult.summary.changes === 0 && pullResult.summary.insertions === 0 && pullResult.summary.deletions === 0) {
+      console.log("Already Up to date...\nChecking in 30 Seconds");
+      return;
+    }
 
     console.log("Pulled the latest changes.");
 
