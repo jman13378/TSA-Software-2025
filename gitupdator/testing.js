@@ -36,6 +36,8 @@ async function updateRepo() {
       return;
     }
 
+
+    
     console.log("Pulled the latest changes.");
 
     // Change directory and run npm install
@@ -62,6 +64,7 @@ async function updateRepo() {
         nodemonProcess = null; // Reset the process reference
       });
     });
+
   } catch (err) {
     console.error(`Error during Git operation: ${err.message}`);
   }
