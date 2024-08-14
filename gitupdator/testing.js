@@ -53,7 +53,7 @@ async function updateRepo() {
       if (nodemonProcess) {
         console.log("Stopping existing nodemon process...");
         nodemonProcess.kill(); // Kill the existing nodemon process
-      }
+      }  
 
       console.log("Starting nodemon with the latest changes...");
       nodemonProcess = spawn('nodemon', ['index.ts'], { cwd: backendPath, stdio: 'pipe' });
