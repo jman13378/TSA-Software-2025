@@ -1,7 +1,7 @@
 const simpleGit = require("simple-git");
 const { exec, spawn } = require("child_process");
 const path = require("path");
-
+var firstrun = true;
 // Define the repository details
 const repoURL = "https://jman13378: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@github.com/PBMHS-TSA/TSA-Software-2025.git";
 const repoPath = path.join(__dirname, "TSA-Software-2025");
@@ -13,8 +13,8 @@ let nodemonProcess = null;
 // Function to set the remote URL with credentials
 async function setRemoteUrl() {
   try {
-    await git.removeRemote('origin');
-    await git.addRemote('origin', repoURL);
+    await git.removeRemote("origin");
+    await git.addRemote("origin", repoURL);
   } catch (err) {
     console.error(`Error setting remote URL: ${err.message}`);
   }
@@ -23,23 +23,25 @@ async function setRemoteUrl() {
 // Function to pull from Git and run commands
 async function updateRepo() {
   try {
-    console.log("Pulling the latest changes from Git...");
+    if (!firstrun) {
+      console.log("Pulling the latest changes from Git...");
 
-    // Ensure the remote URL with credentials is set
-    await setRemoteUrl();
+      // Ensure the remote URL with credentials is set
+      await setRemoteUrl();
 
-    // Pull the latest changes from the Git repository
-    const pullResult = await git.pull("origin", "main");
+      // Pull the latest changes from the Git repository
+      const pullResult = await git.pull("origin", "main");
 
-    if (pullResult.summary.changes === 0 && pullResult.summary.insertions === 0 && pullResult.summary.deletions === 0) {
-      console.log("Already Up to date...\nChecking in 30 Seconds");
-      return;
+      if (pullResult.summary.changes === 0 && pullResult.summary.insertions === 0 && pullResult.summary.deletions === 0) {
+        console.log("Already Up to date...\nChecking in 30 Seconds");
+        return;
+      }
+
+      firstrun = false;
+
+      console.log("Pulled the latest changes.");
     }
-
-
-
-    console.log("Pulled the latest changes.");
-
+    console.log("Starting Backend");
     // Change directory and run npm install
     exec(`npm i`, { cwd: backendPath }, (err, stdout, stderr) => {
       if (err) {
@@ -53,18 +55,16 @@ async function updateRepo() {
       if (nodemonProcess) {
         console.log("Stopping existing nodemon process...");
         nodemonProcess.kill(); // Kill the existing nodemon process
-      }  
+      }
 
       console.log("Starting nodemon with the latest changes...");
-      nodemonProcess = spawn('nodemon', ['index.ts'], { cwd: backendPath, stdio: 'pipe' });
+      nodemonProcess = spawn("nodemon", ["index.ts"], { cwd: backendPath, stdio: "pipe" });
 
-
-      nodemonProcess.on('close', (code) => {
+      nodemonProcess.on("close", (code) => {
         console.log(`Nodemon process exited with code ${code}`);
         nodemonProcess = null; // Reset the process reference
       });
     });
- 
   } catch (err) {
     console.error(`Error during Git operation: ${err.message}`);
   }
