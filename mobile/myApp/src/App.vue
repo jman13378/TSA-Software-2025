@@ -1,7 +1,7 @@
 <template>
   <ion-app>
     
-    <ion-menu content-id="main-content" :type="type">
+    <ion-menu content-id="main-content" type="push">
 
       <ion-content>
         <ion-list id="inbox-list">
@@ -104,9 +104,9 @@ declare global {
   interface Window { device: DeviceInfo; }
 }
 export default {
-  data(_) {
+  data() {
     return {
-      type="push"
+      type:"push"
     }
   },
   beforeMount() {
@@ -114,7 +114,7 @@ export default {
       window.device = info
     });
     if (['Win32', 'Win64', 'Windows', 'WinCE'].includes(window.device.operatingSystem)) this.type = "overlay"
-    else this.type = "push",
+    else this.type = "push"
   }
 }
 </script>
