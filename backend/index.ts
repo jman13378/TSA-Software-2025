@@ -62,6 +62,7 @@ const io = new Server(server, {
 
 });
 const socket = require('./socket')(io, db);
+
 server.listen(3000, "0.0.0.0", () => {
   console.log(server.address())
   console.log('Server running on port 80');

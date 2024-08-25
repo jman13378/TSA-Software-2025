@@ -27,9 +27,28 @@ const routes: Array<RouteRecordRaw> = [
     beforeEnter: (to, from, next) => {
       // Clear the token and user data
 
-      
+
     }
   },
+  {
+    path: '/destroyaccount',
+    redirect: '/login',
+    beforeEnter: (to, from, next) => {
+      // Clear the token and user data
+
+
+    }
+  },
+  {
+    path: '/datadeletion',
+    redirect: '/login',
+    beforeEnter: (to, from, next) => {
+      // Clear the token and user data
+
+
+    }
+  }
+
 ]
 
 const router = createRouter({

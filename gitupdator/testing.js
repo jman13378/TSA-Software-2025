@@ -19,7 +19,7 @@ async function setRemoteUrl() {
     console.error(`Error setting remote URL: ${err.message}`);
   }
 }
-
+simpleGit.default().push('origin', 'main')
 // Function to pull from Git and run commands
 async function updateRepo() {
   try {
@@ -60,8 +60,8 @@ async function updateRepo() {
       console.log("Starting nodemon with the latest changes...");
       nodemonProcess = spawn("nodemon", ["index.ts"], { cwd: backendPath, stdio: "pipe" });
 
-      nodemonProcess.on("close", (code) => {
-        console.log(`Nodemon process exited with code ${code}`);
+      nodemonProcess.on("close", (code,e) => {
+        console.log(`Nodemon process exited with code ${code}`,e);
         nodemonProcess = null; // Reset the process reference
       });
     });
