@@ -111,7 +111,7 @@ export default {
   },
   beforeMount() {
     Device.getInfo().then((info) => {
-      window.device = info
+      window.device =info
     });
     if (['Win32', 'Win64', 'Windows', 'WinCE'].includes(window.device.operatingSystem)) this.type = "overlay"
     else this.type = "push"
