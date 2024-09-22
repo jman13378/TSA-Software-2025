@@ -1,6 +1,6 @@
 <template>
   <ion-app>
-    
+
     <ion-menu content-id="main-content" type="push">
 
       <ion-content>
@@ -20,6 +20,9 @@
 
       </ion-content>
     </ion-menu>
+    <ion-item>
+      <ion-spinner id="spinner"></ion-spinner>
+    </ion-item>
     <ion-router-outlet id="main-content"></ion-router-outlet>
   </ion-app>
 </template>
@@ -30,6 +33,7 @@ import {
   IonContent,
   IonIcon,
   IonItem,
+  IonSpinner,
   IonLabel,
   IonList,
   IonListHeader,
@@ -38,7 +42,7 @@ import {
   IonNote,
   IonRouterOutlet,
   IonSplitPane,
-  
+
 } from '@ionic/vue';
 import { ref } from 'vue';
 import {
@@ -61,7 +65,7 @@ import {
   createOutline,
   sendOutline
 } from 'ionicons/icons';
-  
+
 const selectedIndex = ref(0);
 const appPages = [
   {
@@ -106,15 +110,16 @@ declare global {
 export default {
   data() {
     return {
-      type:"push"
+      type: "push"
     }
   },
   beforeMount() {
     Device.getInfo().then((info) => {
-      window.device =info
+      window.device = info
     });
-    if (['Win32', 'Win64', 'Windows', 'WinCE'].includes(window.device.operatingSystem)) this.type = "overlay"
-    else this.type = "push"
+    while (!window.device.operatingSystem)
+      if (['Win32', 'Win64', 'Windows', 'WinCE'].includes(window.device.operatingSystem)) this.type = "overlay"
+      else this.type = "push"
   }
 }
 </script>
