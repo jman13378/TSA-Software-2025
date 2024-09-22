@@ -28,6 +28,7 @@
 </template>
 
 <script setup lang="ts">
+import 
 import {
   IonApp,
   IonContent,
@@ -42,7 +43,7 @@ import {
   IonNote,
   IonRouterOutlet,
   IonSplitPane,
-
+  
 } from '@ionic/vue';
 import { ref } from 'vue';
 import {
@@ -117,6 +118,7 @@ export default {
     Device.getInfo().then((info) => {
       window.device = info
     });
+    
     while (!window.device.operatingSystem)
       if (['Win32', 'Win64', 'Windows', 'WinCE'].includes(window.device.operatingSystem)) this.type = "overlay"
       else this.type = "push"
