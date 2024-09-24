@@ -28,7 +28,7 @@
 </template>
 
 <script setup lang="ts">
-import 
+
 import {
   IonApp,
   IonContent,
