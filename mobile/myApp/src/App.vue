@@ -55,53 +55,34 @@ import {
   
 } from '@ionic/vue';
 import { ref } from 'vue';
-import {
-  archiveOutline,
-  archiveSharp,
-  bookmarkOutline,
-  bookmarkSharp,
-  heartOutline,
-  heartSharp,
-  mailOutline,
-  mailSharp,
-  paperPlaneOutline,
-  paperPlaneSharp,
-  trashOutline,
-  trashSharp,
-  warningOutline,
-  warningSharp,
-  logInOutline,
-  logOutOutline,
-  createOutline,
-  sendOutline
-} from 'ionicons/icons';
+import * as outlines from 'ionicons/icons';
 
 const selectedIndex = ref(0);
 const appPages = [
   {
     title: 'Login',
     url: '/login',
-    iosIcon: logInOutline,
-    mdIcon: logInOutline,
+    iosIcon: outlines.logInOutline,
+    mdIcon: outlines.logInOutline,
     showIf: true
   }, {
     title: 'Signup',
     url: '/signup',
-    iosIcon: createOutline,
-    mdIcon: createOutline,
+    iosIcon: outlines.createOutline,
+    mdIcon: outlines.createOutline,
     showIf: false
   },
   {
     title: 'Chat',
     url: '/chat',
-    iosIcon: sendOutline,
-    mdIcon: sendOutline,
+    iosIcon: outlines.sendOutline,
+    mdIcon: outlines.sendOutline,
     showIf: false
   }, {
     title: 'Logout',
     url: '/logout',
-    iosIcon: logOutOutline,
-    mdIcon: logOutOutline,
+    iosIcon: outlines.logOutOutline,
+    mdIcon: outlines.logOutOutline,
     showIf: false
   },
 ];
@@ -126,8 +107,8 @@ export default {
         {
           title: 'Chat',
           url: '/chat',
-          iosIcon: eval("sendOutline"),
-          mdIcon: eval("sendOutline"),
+          iosIcon: eval("outlines.sendOutline"),
+          mdIcon: eval("outlines.sendOutline"),
           showIf: false
         }
       ]

@@ -48,10 +48,6 @@ app.use('/payments', settingsRoute)
 
 
 
-app.get('*', (req, res) => {
-  res.status(200).json({ data: "404 Doesn't exist" });
-});
-
 const server = https.createServer(credentials, app);
 const io = new Server(server, {
   cors: {
@@ -61,8 +57,8 @@ const io = new Server(server, {
   allowEIO3: true,
 
 });
-const socket = require('./socket')(io, db);
-
+import { run } from './socket';
+run(io, db);
 server.listen(3000, "0.0.0.0", () => {
   console.log(server.address())
   console.log('Server running on port 80');

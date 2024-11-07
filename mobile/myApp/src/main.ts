@@ -1,8 +1,13 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router';
-
+import { CredentialManager, playSound, sendNotification, socket } from "./globals";
 import { IonicVue } from '@ionic/vue';
+
+
+socket.socket.on("connect_error", (err) => {
+  console.error("Socket connection error:", err);
+});
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/vue/css/core.css';

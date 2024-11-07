@@ -31,15 +31,46 @@
                         <ion-select v-model="state" label="State" label-placement="stacked">
                             <ion-select-option v-for="(state, index) in stateIds" :value="states[index]">{{
                                 states[index]
-                                }}</ion-select-option>
+                            }}</ion-select-option>
                         </ion-select>
                     </ion-item>
                     <ion-item>
                         <ion-label>
                             <ion-input labelPlacement="stacked" label="Password" v-model="password" name="password"
-                                type="text" required></ion-input>
+                                type="password" @ion-input="completePassword"
+                                error-text="Password is missing the proper items" required></ion-input>
+                            <ion-list>
+                                <ion-item>
+                                    <ion-label style="font-size: .3cm;">
+
+                                        <ion-label><ion-icon
+                                                :style="`color:${hasCharAmount() ? 'green' : 'red'} ;font-size: .5cm;`"
+                                                :icon="hasCharAmount() ? outlines.checkmark : outlines.close"></ion-icon>
+                                            Must Include at least 8 Characters</ion-label>
+                                        <ion-label><ion-icon
+                                                :style="`color:${hasLowercase() ? 'green' : 'red'} ;font-size: .5cm;`"
+                                                :icon="hasLowercase() ? outlines.checkmark : outlines.close"></ion-icon>
+                                            Must Include at least 1 Lowercase Character </ion-label>
+                                        <ion-label><ion-icon
+                                                :style="`color:${hasUppercase() ? 'green' : 'red'} ;font-size: .5cm;`"
+                                                :icon="hasUppercase() ? outlines.checkmark : outlines.close"></ion-icon>
+                                            Must Include at least 1 Uppercase Character </ion-label>
+                                        <ion-label><ion-icon
+                                                :style="`color:${hasSymbol() ? 'green' : 'red'} ;font-size: .5cm;`"
+                                                :icon="hasSymbol() ? outlines.checkmark : outlines.close"></ion-icon>
+                                            Must Include at least 1 Symbol</ion-label>
+                                        <ion-label><ion-icon
+                                                :style="`color:${hasNumber() ? 'green' : 'red'} ;font-size: .5cm;`"
+                                                :icon="hasNumber() ? outlines.checkmark : outlines.close"></ion-icon>
+                                            Must Include at least 1 Number</ion-label>
+                                    </ion-label>
+
+                                </ion-item>
+                            </ion-list>
                             <ion-input labelPlacement="stacked" label="Confirm Password" v-model="rePassword"
-                                name="rePassword" type="text" required></ion-input></ion-label>
+                                name="rePassword" type="password" error-text="Passwords Don't Match" required>
+                            </ion-input>
+                        </ion-label>
                     </ion-item>
 
 
@@ -64,7 +95,8 @@
                             <ion-input labelPlacement="stacked" label="Chapter Id" v-model="chapterId" name="chapterId"
                                 type="text" placeholder="Your unique Chapter Id assigned from TSA" required></ion-input>
                             <ion-input labelPlacement="stacked" label="TSA Student Id" v-model="studentId"
-                                name="studentId" placeholder="Your unique Student Id assigned from TSA" type="text" required></ion-input>
+                                name="studentId" placeholder="Your unique Student Id assigned from TSA" type="text"
+                                required></ion-input>
                         </ion-label>
                     </ion-item>
                     <ion-item v-if="userType == 'advisor'"> <ion-label>
@@ -82,10 +114,13 @@
                                 </ion-radio-group></ion-item>
                             <ion-input labelPlacement="stacked" label="Chapter Id" v-model="chapterId" name="chapterId"
                                 type="text" placeholder="Your unique Chapter Id assigned from TSA" required></ion-input>
-                            <ion-input labelPlacement="stacked" v-if="chapterOption == 'create'" label="Organization Name"
-                                v-model="orgName" name="orgName" placeholder="The name which will be displayed on your Chapter" type="text" required></ion-input>
-                            <ion-input labelPlacement="stacked" v-if="chapterOption == 'create'" label="Pin" v-model="pin"
-                                name="pin" type="number" maxlength="6" minlength="4" placeholder="A Chapter Modification PIN 4-6 Numbers" required></ion-input>
+                            <ion-input labelPlacement="stacked" v-if="chapterOption == 'create'"
+                                label="Organization Name" v-model="orgName" name="orgName"
+                                placeholder="The name which will be displayed on your Chapter" type="text"
+                                required></ion-input>
+                            <ion-input labelPlacement="stacked" v-if="chapterOption == 'create'" label="Pin"
+                                v-model="pin" name="pin" type="number" :maxlength='6' :minlength="4"
+                                placeholder="A Chapter Modification PIN 4-6 Numbers" required></ion-input>
                         </ion-label>
                     </ion-item>
                     <ion-item v-if="userType == 'parent'"> <ion-label>
@@ -95,7 +130,8 @@
                             <ion-input labelPlacement="stacked" label="Chapter Id" v-model="chapterId" name="chapterId"
                                 type="text" placeholder="Your unique Chapter Id assigned from TSA" required></ion-input>
                             <ion-input labelPlacement="stacked" label="Student Id" v-model="studentId" name="studentId"
-                                type="text" placeholder="Your child's unique Student Id assigned from TSA" required></ion-input>
+                                type="text" placeholder="Your child's unique Student Id assigned from TSA"
+                                required></ion-input>
                         </ion-label>
                     </ion-item>
                     <ion-item>
@@ -130,7 +166,7 @@
 }
 </style>
 
-<script setup lang="ts">
+<script lang="ts">
 import { Device } from '@capacitor/device';
 
 import { states, stateIds, getState } from "../helper"
@@ -146,6 +182,7 @@ import {
     IonContent,
     IonList,
     IonItem,
+    IonIcon,
     IonTitle,
     IonRow,
     IonCol,
@@ -155,6 +192,8 @@ import {
     IonRadioGroup,
     IonRadio
 } from "@ionic/vue";
+import * as outlines from 'ionicons/icons';
+import { defineComponent } from 'vue';
 
 const email = ref("");
 const name = ref("");
@@ -174,11 +213,30 @@ const showToast = ref(false);
 const toastMessage = ref("");
 
 
-
-
+function hasLowercase() {
+    return /[a-z]/.test(password.value);
+}
+function hasUppercase() {
+    return /[A-Z]/.test(password.value);
+}
+function hasSymbol() {
+    return /[!@#$%^&*(),.?":{}|<>_\-+=\[\]`~;'\/]/.test(password.value);
+}
+function hasNumber() {
+    return /[0-9]/.test(password.value);
+}
+function hasCharAmount() {
+    return /.{8,}/.test(password.value);
+}
+function completePassword() {
+    hasLowercase() && hasUppercase() && hasSymbol() && hasNumber() && hasCharAmount() ? password.$el.classList.add('ion-valid')
+        : password.$el.classList.add('ion-invalid');
+}
+export default defineComponent({
+})
 const onSignup = () => {
-    console.log (email.value, name.value, state.value, userType.value, chapterId.value, password.value, rePassword.value, pin.value, chapterOption.value, studentId.value)
+    console.log(email.value, name.value, state.value, userType.value, chapterId.value, password.value, rePassword.value, pin.value, chapterOption.value, studentId.value)
     //this.$router.push("/announcements")
 };
-
+console.log(hasCharAmount())
 </script>
