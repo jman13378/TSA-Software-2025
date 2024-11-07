@@ -16,8 +16,10 @@ module.exports = function (io: Server, socket:Socket, db:Database) {
                 chapterOption:json.chapterOption ,
                 studentId:json.studentId ,
             }
-
-
-        callback();
+if (options.password!=options.rePassword) {
+    callback(false);
+}
+db.addUser(email,username,password)
+        callback(true);
     });
 }; 

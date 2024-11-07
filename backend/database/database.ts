@@ -61,7 +61,18 @@ class Database {
 
 
   }
-  async addUser(email: string, username: string, password: string) {
+  /*
+      db.exec("CREATE TABLE IF NOT EXISTS users (" +
+      "UserId NUMERIC NOT NULL UNIQUE," +
+      "email TEXT NOT NULL UNIQUE," +
+      "username TEXT NOT NULL UNIQUE," +
+      "password TEXT NOT NULL," +
+      "chapterId NUMERIC NOT NULL," +
+      "lastLogin NUMERIC NOT NULL," +
+      "phone TEXT NOT NULL," +
+      "profile BLOB NOT NULL);")
+      */
+  async addUser(email: string, username: string, password: string, chapterId: number, phone: string) {
     let stmt = db.prepare("INSERT INTO users(UserId,email,username,password,profile,lastLogin) VALUES(?,?,?,?,?);");
     stmt.run(Date.now(), JSON.stringify(
       {
