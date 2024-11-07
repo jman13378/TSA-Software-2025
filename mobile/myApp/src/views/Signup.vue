@@ -30,8 +30,8 @@
                     <ion-item>
                         <ion-select v-model="state" label="State" label-placement="stacked">
                             <ion-select-option v-for="(state, index) in stateIds" :value="states[index]">{{
-                states[index]
-            }}</ion-select-option>
+                                states[index]
+                                }}</ion-select-option>
                         </ion-select>
                     </ion-item>
                     <ion-item>
@@ -42,10 +42,7 @@
                                 name="rePassword" type="text" required></ion-input></ion-label>
                     </ion-item>
 
-                    <ion-item>
-                        <ion-input labelPlacement="stacked" label="start" v-model="name" name="E" type="text"
-                            required></ion-input>
-                    </ion-item>
+
                     <ion-item> <ion-label>
                             <center>
                                 <h1 style="align-self: center;">User Type</h1>
@@ -60,51 +57,54 @@
                             </p>
                         </ion-label>
                     </ion-item>
-                    <ion-item v-if="userType=='student'"> <ion-label>
+                    <ion-item v-if="userType == 'student'"> <ion-label>
                             <center>
-                                <h1 style="align-self: center;">Student</h1>
+                                <h1 style="align-self: center;">Student Signup</h1>
                             </center>
                             <ion-input labelPlacement="stacked" label="Chapter Id" v-model="chapterId" name="chapterId"
-                                type="text" required></ion-input>
-                                <ion-input labelPlacement="stacked" label="TSA Student Id" v-model="studentId" name="studentId"
-                                type="text" required></ion-input>
+                                type="text" placeholder="Your unique Chapter Id assigned from TSA" required></ion-input>
+                            <ion-input labelPlacement="stacked" label="TSA Student Id" v-model="studentId"
+                                name="studentId" placeholder="Your unique Student Id assigned from TSA" type="text" required></ion-input>
                         </ion-label>
                     </ion-item>
-                    <ion-item v-if="userType=='advisor'"> <ion-label>
+                    <ion-item v-if="userType == 'advisor'"> <ion-label>
                             <center>
-                                <h1 style="align-self: center;">Advisor</h1>
+                                <h1 style="align-self: center;">Advisor Signup</h1>
                             </center>
-                            <ion-radio-group v-model="chapterOption" value="stacked">
-                                <ion-radio value="create" label-placement="start">Create a New Chapter</ion-radio>
-                                <ion-radio value="existing" label-placement="start">Select an existing
-                                    Chapter</ion-radio>
+                            <ion-item>
+                                <ion-radio-group v-model="chapterOption" value="stacked">
+                                    <ion-radio value="create" label-placement="start">Create a New Chapter</ion-radio>
+                                    <ion-radio value="existing" label-placement="start">Select an existing
+                                        Chapter</ion-radio>
 
-                            </ion-radio-group>
+
+
+                                </ion-radio-group></ion-item>
                             <ion-input labelPlacement="stacked" label="Chapter Id" v-model="chapterId" name="chapterId"
-                                type="text" required></ion-input>
-                            <ion-input labelPlacement="stacked" v-if="chapterOption=='create'" label="Organization Name" v-model="orgName"
-                                name="orgName" type="text" required></ion-input>
-                            <ion-input labelPlacement="stacked" v-if="chapterOption=='create'" label="Pin" v-model="pin"
-                                name="pin" type="number" required></ion-input>
+                                type="text" placeholder="Your unique Chapter Id assigned from TSA" required></ion-input>
+                            <ion-input labelPlacement="stacked" v-if="chapterOption == 'create'" label="Organization Name"
+                                v-model="orgName" name="orgName" placeholder="The name which will be displayed on your Chapter" type="text" required></ion-input>
+                            <ion-input labelPlacement="stacked" v-if="chapterOption == 'create'" label="Pin" v-model="pin"
+                                name="pin" type="number" maxlength="6" minlength="4" placeholder="A Chapter Modification PIN 4-6 Numbers" required></ion-input>
                         </ion-label>
                     </ion-item>
-                    <ion-item v-if="userType=='parent'"> <ion-label>
+                    <ion-item v-if="userType == 'parent'"> <ion-label>
                             <center>
-                                <h1 style="align-self: center;">Parent</h1>
+                                <h1 style="align-self: center;">Parent Signup</h1>
                             </center>
                             <ion-input labelPlacement="stacked" label="Chapter Id" v-model="chapterId" name="chapterId"
-                                type="text" required></ion-input>
+                                type="text" placeholder="Your unique Chapter Id assigned from TSA" required></ion-input>
                             <ion-input labelPlacement="stacked" label="Student Id" v-model="studentId" name="studentId"
-                                type="text" required></ion-input>
+                                type="text" placeholder="Your child's unique Student Id assigned from TSA" required></ion-input>
                         </ion-label>
                     </ion-item>
                     <ion-item>
-                        <ion-button><ion-label>Have an Account? Signup!</ion-label></ion-button></ion-item>
+                        <ion-button><ion-label>Have an Account? Login!</ion-label></ion-button></ion-item>
                 </ion-list>
 
                 <ion-row responsive-sm class="ion-padding">
                     <ion-col>
-                        <ion-button  type="submit" expand="block">Login</ion-button>
+                        <ion-button type="submit" expand="block">Signup</ion-button>
                     </ion-col>
 
                 </ion-row>
@@ -169,7 +169,7 @@ const chapterOption = ref("");
 const studentId = ref("");
 
 
-const submitted = ref(false); 
+const submitted = ref(false);
 const showToast = ref(false);
 const toastMessage = ref("");
 
@@ -177,8 +177,8 @@ const toastMessage = ref("");
 
 
 const onSignup = () => {
-
-   //this.$router.push("/announcements")
+    console.log (email.value, name.value, state.value, userType.value, chapterId.value, password.value, rePassword.value, pin.value, chapterOption.value, studentId.value)
+    //this.$router.push("/announcements")
 };
 
 </script>

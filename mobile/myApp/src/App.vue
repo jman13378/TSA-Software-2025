@@ -6,9 +6,18 @@
       <ion-content>
         <ion-list id="inbox-list">
           <ion-list-header>Welcome Back!</ion-list-header>
-          <ion-note>Username </ion-note>
+          <ion-note>{{username ? username : "" }}</ion-note>
 
           <ion-menu-toggle :auto-hide="false" v-for="(p, i) in appPages" :v-if="p.showIf" :key="i">
+            <ion-item @click="selectedIndex = i" router-direction="root" :router-link="p.url" lines="none"
+              :detail="false" class="hydrated" :class="{ selected: selectedIndex === i }">
+              <ion-icon aria-hidden="true" slot="start" :ios="p.iosIcon" :md="p.mdIcon"></ion-icon>
+              <ion-label>{{ p.title }}</ion-label>
+            </ion-item>
+            <br>
+          </ion-menu-toggle>
+          <ion-list-header>Rooms</ion-list-header>
+          <ion-menu-toggle :auto-hide="false" v-for="(p, i) in rooms" :v-if="p.showIf" :key="i">
             <ion-item @click="selectedIndex = i" router-direction="root" :router-link="p.url" lines="none"
               :detail="false" class="hydrated" :class="{ selected: selectedIndex === i }">
               <ion-icon aria-hidden="true" slot="start" :ios="p.iosIcon" :md="p.mdIcon"></ion-icon>
@@ -106,11 +115,21 @@ declare global {
 export default {
   data() {
     return {
-      type:"push"
+      username:undefined,
+      type:"push",
+      rooms: [
+        {
+          title: 'Chat',
+          url: '/chat',
+          iosIcon: eval("sendOutline"),
+          mdIcon: eval("sendOutline"),
+          showIf: false
+        }
+      ]
     }
   },
-  beforeMount() {
-    Device.getInfo().then((info) => {
+  async beforeMount() {
+    await Device.getInfo().then((info) => {
       window.device = info
     });
     if (['Win32', 'Win64', 'Windows', 'WinCE'].includes(window.device.operatingSystem)) this.type = "overlay"
